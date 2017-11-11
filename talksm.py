@@ -2,6 +2,8 @@
 from telegram.ext import Updater
 # init message handler
 from telegram.ext import CommandHandler
+# echo handler
+from telegram.ext import MessageHandler, Filters
 import logging
 # for parse config
 import yaml
@@ -23,14 +25,19 @@ token = config['auth']['token']
 print(token)
 
 
+def echo(bot, update):
+    bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
+
 
 def start(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text="I'm a bot, please talk to me!")
 
 def attr():
     start_handler = CommandHandler('start', start)
-    dispatcher.add_handler(start_handler)
+    echo_handler = MessageHandler(Filters.text, echo)
     updater.start_polling()
+    dispatcher.add_handler(start_handler)
+    dispatcher.add_handler(echo_handler)
 
 if __name__ == '__main__':
     attr()
