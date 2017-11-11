@@ -7,11 +7,9 @@ from telegram.ext import MessageHandler, Filters
 import logging
 # for parse config
 import yaml
+# parse response
+import json
 
-
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.INFO)
-updater = Updater(token='366401853:AAE8IEvYxANZiywH7_IQMnzMfhr11jERJPw')
-dispatcher = updater.dispatcher
 
 def parse_configs(path):
     """Parse configuration YAML configuration file."""
@@ -22,7 +20,13 @@ def parse_configs(path):
 config_path = './tel.cfg'
 config = parse_configs(config_path)
 token = config['auth']['token']
-print(token)
+
+
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.INFO)
+updater = Updater(token=token)
+dispatcher = updater.dispatcher
+
+
 
 
 def echo(bot, update):
@@ -32,12 +36,20 @@ def echo(bot, update):
 def start(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text="I'm a bot, please talk to me!")
 
+def info(bot, update):
+    r = str((bot.get_me()))
+    # print(r)
+    bot.send_message(chat_id=update.message.chat_id, text=r)
+
+
 def attr():
     start_handler = CommandHandler('start', start)
+    info_handler = CommandHandler('info', info)
     echo_handler = MessageHandler(Filters.text, echo)
     updater.start_polling()
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(echo_handler)
+    dispatcher.add_handler(info_handler)
 
 if __name__ == '__main__':
     attr()
