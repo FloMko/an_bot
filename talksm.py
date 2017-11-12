@@ -17,6 +17,8 @@ import yaml
 # parse response
 import json
 
+from scii import *
+
 
 def parse_configs(cfg_path):
     """Parse configuration YAML configuration file."""
@@ -41,11 +43,11 @@ def get_image(bot, update):
     print(chat_id)
     file_id=(p[-1]['file_id'])
     file_path=abspath('./pic/'+file_id)
+    bot.get_file(file_id).download(custom_path=file_path)
+    main(file_id)
     file_name = ('./pic/'+file_id+'lum')
     file_open = open(file_name, 'rb')
-    
-    bot.get_file(file_id).download(custom_path=file_path)
-    bot.send_photo(chat_id=chat_id, photo=file_open)
+    bot.sendDocument(chat_id=chat_id, document=file_open)
 
 #def send_image(bot, update):
 #    bot.send_photo(chat_id=update.message.chat_id, photo =file_path+'lum')
