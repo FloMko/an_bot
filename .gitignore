@@ -1,1 +1,4 @@
+# for python project cashe
+__pycache__
+# restruct access to token
 *.cfg
