@@ -4,6 +4,7 @@ from telegram.ext import Updater
 from telegram.ext import CommandHandler
 # echo handler
 from telegram.ext import MessageHandler, Filters
+from telegram import InputFile
 import logging
 # for parse config
 import yaml
@@ -28,6 +29,10 @@ dispatcher = updater.dispatcher
 
 
 
+def luminance(bot, update):
+    # bot.send_message(chat_id=update.message.chat_id, text=update.message.photo)
+    p =(update.message.photo())
+    print(typr(p))
 
 def echo(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
@@ -46,10 +51,13 @@ def attr():
     start_handler = CommandHandler('start', start)
     info_handler = CommandHandler('info', info)
     echo_handler = MessageHandler(Filters.text, echo)
+    photo_handler = MessageHandler(Filters.photo| Filters.document, luminance)
+
     updater.start_polling()
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(echo_handler)
     dispatcher.add_handler(info_handler)
+    dispatcher.add_handler(photo_handler)
 
 if __name__ == '__main__':
     attr()
