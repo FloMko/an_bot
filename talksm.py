@@ -5,7 +5,10 @@ from telegram.ext import CommandHandler
 # echo handler
 from telegram.ext import MessageHandler, Filters
 # download photo 
-from telegram import File 
+from telegram import File, Bot
+#"""This module contains an object that represents a Telegram File."""
+from os.path import basename
+from os.path import abspath
 
 
 import logging
@@ -15,9 +18,9 @@ import yaml
 import json
 
 
-def parse_configs(path):
+def parse_configs(cfg_path):
     """Parse configuration YAML configuration file."""
-    with open(path) as cfg:
+    with open(cfg_path) as cfg:
         config = yaml.load(cfg.read())
     return config
 
@@ -35,8 +38,12 @@ def luminance(bot, update):
     # bot.send_message(chat_id=update.message.chat_id, text=update.message.photo)
     p =(update.message.photo)
     file_id=(p[-1]['file_id'])
-    File(file_id).download()
-
+    file_path=abspath('./pic/'+file_id)
+    print(file_path)
+    Bot(token=token).get_file(file_id).download(custom_path=file_path)
+    #File(file_id).download(file_path='./')
+    #File(file_id, file_path=file_path, bot=bot).download()
+    #File(file_id, file_path=file_path, bot=bot).download()
 
 def echo(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
@@ -57,7 +64,7 @@ def attr():
     start_handler = CommandHandler('start', start)
     info_handler = CommandHandler('info', info)
     echo_handler = MessageHandler(Filters.text, echo)
-    photo_handler = MessageHandler(Filters.photo| Filters.document, luminance)
+    photo_handler = MessageHandler(Filters.photo, luminance)
 
     updater.start_polling()
     dispatcher.add_handler(start_handler)
