@@ -34,16 +34,23 @@ updater = Updater(token=token)
 dispatcher = updater.dispatcher
 
 
-def luminance(bot, update):
+def get_image(bot, update):
     # bot.send_message(chat_id=update.message.chat_id, text=update.message.photo)
     p =(update.message.photo)
+    chat_id=update.message.chat_id
+    print(chat_id)
     file_id=(p[-1]['file_id'])
     file_path=abspath('./pic/'+file_id)
-    print(file_path)
-    Bot(token=token).get_file(file_id).download(custom_path=file_path)
-    #File(file_id).download(file_path='./')
-    #File(file_id, file_path=file_path, bot=bot).download()
-    #File(file_id, file_path=file_path, bot=bot).download()
+    file_name = ('./pic/'+file_id+'lum')
+    file_open = open(file_name, 'rb')
+    
+    bot.get_file(file_id).download(custom_path=file_path)
+    bot.send_photo(chat_id=chat_id, photo=file_open)
+
+#def send_image(bot, update):
+#    bot.send_photo(chat_id=update.message.chat_id, photo =file_path+'lum')
+    
+
 
 def echo(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
@@ -64,7 +71,7 @@ def attr():
     start_handler = CommandHandler('start', start)
     info_handler = CommandHandler('info', info)
     echo_handler = MessageHandler(Filters.text, echo)
-    photo_handler = MessageHandler(Filters.photo, luminance)
+    photo_handler = MessageHandler(Filters.photo, get_image)
 
     updater.start_polling()
     dispatcher.add_handler(start_handler)

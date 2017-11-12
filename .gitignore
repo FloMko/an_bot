@@ -1,4 +1,5 @@
 # for python project cashe
 __pycache__
+pic
 # restruct access to token
 *.cfg
