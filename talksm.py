@@ -4,7 +4,10 @@ from telegram.ext import Updater
 from telegram.ext import CommandHandler
 # echo handler
 from telegram.ext import MessageHandler, Filters
-from telegram import InputFile
+# download photo 
+from telegram import File 
+
+
 import logging
 # for parse config
 import yaml
@@ -28,11 +31,12 @@ updater = Updater(token=token)
 dispatcher = updater.dispatcher
 
 
-
 def luminance(bot, update):
     # bot.send_message(chat_id=update.message.chat_id, text=update.message.photo)
-    p =(update.message.photo())
-    print(typr(p))
+    p =(update.message.photo)
+    file_id=(p[-1]['file_id'])
+    File(file_id).download()
+
 
 def echo(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
@@ -46,6 +50,8 @@ def info(bot, update):
     # print(r)
     bot.send_message(chat_id=update.message.chat_id, text=r)
 
+def close():                                                                                
+    updater.stop()
 
 def attr():
     start_handler = CommandHandler('start', start)
