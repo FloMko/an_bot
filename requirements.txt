@@ -41,7 +41,7 @@ pyparsing==2.0.3
 python-apt==1.1.0b1
 python-dateutil==2.4.2
 python-debian==0.1.27
-python-gnupg==0.3.8
+python-gnupg==0.4.4
 python-telegram-bot==8.1.1
 pytz==2014.10
 pyxdg==0.25
