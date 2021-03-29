@@ -35,7 +35,7 @@ pycurl==7.43.0
 pygal==2.3.1
 pygal-maps-world==1.0.2
 pygame==1.9.3
-Pygments==2.1
+Pygments==2.7.4
 pygobject==3.20.0
 pyparsing==2.0.3
 python-apt==1.1.0b1
