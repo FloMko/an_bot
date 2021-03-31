@@ -19,7 +19,7 @@ ipython-genutils==0.2.0
 jedi==0.10.2
 jmespath==0.9.0
 language-selector==0.1
-lxml==3.5.0
+lxml==4.6.3
 Magic-file-extensions==0.2
 matplotlib==1.5.1
 numpy==1.11.0
