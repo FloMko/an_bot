@@ -22,7 +22,7 @@ language-selector==0.1
 lxml==3.5.0
 Magic-file-extensions==0.2
 matplotlib==1.5.1
-numpy==1.11.0
+numpy==1.21.0
 pexpect==4.0.1
 pickleshare==0.7.4
 Pillow==3.1.2
