@@ -13,7 +13,7 @@ devscripts===2.16.2ubuntu3
 Django==1.11.3
 docutils==0.12
 future==0.16.0
-html5lib==0.999
+html5lib==0.999999999
 ipython==6.1.0
 ipython-genutils==0.2.0
 jedi==0.10.2
