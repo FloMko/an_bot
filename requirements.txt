@@ -3,7 +3,7 @@ argcomplete==0.8.1
 awscli==1.11.13
 beautifulsoup4==4.4.1
 botocore==1.4.70
-certifi==2017.11.5
+certifi==2022.12.7
 chardet==2.3.0
 colorama==0.3.7
 command-not-found==0.3
